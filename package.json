@@ -8,7 +8,7 @@
     "eslint": "eslint src",
     "prebuild": "npm run eslint",
     "build": "babel src -d build",
-    "test": "jest src",
+    "test": "jest",
     "test:watch": "npm test -- --watch",
     "prepublish": "npm run build",
     "release": "np"
