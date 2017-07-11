@@ -1,5 +1,7 @@
 # Redux Bluetooth
 
+[![Build Status](https://travis-ci.org/jvallelunga/redux-bluetooth.svg?branch=master)](https://travis-ci.org/jvallelunga/redux-bluetooth)
+
 ```shell
 $ npm install redux-bluetooth
 ```
