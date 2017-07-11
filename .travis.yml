@@ -6,6 +6,7 @@ addons:
     sources:
       - sourceline: 'ppa:ubuntu-toolchain-r/test'
     packages:
+      - python-software-properties
       - python
       - cmake
       - build-essential
