@@ -4,10 +4,11 @@ node_js:
 addons:
   apt:
     packages:
-      - python3.6
+      - python
+      - cmake
       - build-essential
-      - gcc-4.8
-      - g++-4.8  
+      - gcc
+      - g++
 before_install: 
   - npm install -g node-gyp
 script:
