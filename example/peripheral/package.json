@@ -1,0 +1,45 @@
+{
+  "name": "redux-bluetooth-counter-peripheral",
+  "version": "0.1.0",
+  "description": "Redux Bluetooth example: Counter peripheral",
+  "main": "build/index.js",
+  "scripts": {
+    "prestart": "npm run build",
+    "start": "node build/index.js",
+    "dev": "watch 'npm run build' src",
+    "build": "babel src -d build",
+    "test": "jest",
+    "test:watch": "npm test -- --watch"
+  },
+  "babel": {
+    "presets": [
+      "latest"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jvallelunga/redux-bluetooth.git"
+  },
+  "keywords": [
+    "redux-bluetooth",
+    "example",
+    "counter",
+    "peripheral"
+  ],
+  "author": "Jeronimo Vallelunga",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jvallelunga/redux-bluetooth/issues"
+  },
+  "homepage": "https://github.com/jvallelunga/redux-bluetooth#readme",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-latest": "^6.24.1",
+    "jest": "^20.0.4",
+    "watch": "^1.0.2"
+  },
+  "dependencies": {
+    "redux": "^3.7.1",
+    "redux-bluetooth": "file:../../"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "name": "redux-bluetooth-counter-webapp",
+  "version": "0.1.0",
+  "description": "Redux Bluetooth example: Counter webapp",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jvallelunga/redux-bluetooth.git"
+  },
+  "keywords": [
+    "redux-bluetooth",
+    "example",
+    "counter",
+    "webapp"
+  ],
+  "author": "Jeronimo Vallelunga",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jvallelunga/redux-bluetooth/issues"
+  },
+  "homepage": "https://jvallelunga.github.io/redux-bluetooth",
+  "dependencies": {
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.1",
+    "redux-bluetooth": "file:../../",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^1.0.0",
+    "react-scripts": "1.0.10"
+  }
+}

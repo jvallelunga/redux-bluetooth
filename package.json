@@ -1,0 +1,50 @@
+{
+  "name": "redux-bluetooth",
+  "version": "0.0.0",
+  "description": "Redux middleware to dispatch actions via bluetooth to a peripheral store",
+  "main": "build/index.js",
+  "scripts": {
+    "dev": "watch 'npm run build' src",
+    "build": "babel src -d build",
+    "test": "jest",
+    "test:watch": "npm test -- --watch",
+    "prepublish": "npm run build",
+    "release": "np"
+  },
+  "babel": {
+    "presets": [
+      "latest"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jvallelunga/redux-bluetooth.git"
+  },
+  "keywords": [
+    "redux",
+    "middleware",
+    "bluetooth",
+    "iot",
+    "bleno",
+    "peripheral",
+    "web-bluetooth",
+    "central"
+  ],
+  "author": "Jeronimo Vallelunga",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jvallelunga/redux-bluetooth/issues"
+  },
+  "homepage": "https://github.com/jvallelunga/redux-bluetooth#readme",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-latest": "^6.24.1",
+    "jest": "^20.0.4",
+    "np": "^2.16.0",
+    "watch": "^1.0.2"
+  },
+  "dependencies": {
+    "bleno": "^0.4.2",
+    "text-encoding": "^0.6.4"
+  }
+}
