@@ -1,6 +1,6 @@
 {
   "name": "redux-bluetooth",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Redux middleware to dispatch actions via bluetooth to a peripheral store",
   "main": "build/index.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "eslint": "eslint src",
     "prebuild": "npm run eslint",
     "build": "babel src -d build",
-    "test": "jest",
+    "test": "jest build",
     "test:watch": "npm test -- --watch",
     "prepublish": "npm run build",
     "release": "np"
