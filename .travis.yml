@@ -1,19 +1,16 @@
+sudo: false
+env:
+  - CXX=g++-4.8
 language: node_js
 node_js:
-  - "node"
+  - "4"
 addons:
   apt:
     sources:
-      - sourceline: 'ppa:ubuntu-toolchain-r/test'
+    - ubuntu-toolchain-r-test
     packages:
-      - python-software-properties
-      - python
-      - cmake
-      - build-essential
-      - gcc-5
-      - g++-5
-before_install: 
-  - npm install -g node-gyp
+    - gcc-4.8
+    - g++-4.8
 script:
   - npm run test
 branches:
