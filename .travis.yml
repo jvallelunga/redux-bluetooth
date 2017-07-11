@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - "node"
+script:
+  - npm run eslint
+  - npm run test
+branches:
+  only:
+    - master
+cache:
+  directories:
+  - node_modules

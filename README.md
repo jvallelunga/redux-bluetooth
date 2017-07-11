@@ -17,7 +17,6 @@ console.log(dummy());
 - redux-observable
 - CI: CircleCI | Travis
 - Coverage: Coverall | https://codecov.io/
-- Eslint
 - bundlesize
 - Badges: ci, coverage, npm
 - https://greenkeeper.io/
