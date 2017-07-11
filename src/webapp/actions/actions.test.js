@@ -1,3 +1,4 @@
+/* global jest, beforeEach, afterEach, test, expect */
 import * as TYPES from './types';
 import Actions from './actions';
 
@@ -11,7 +12,7 @@ beforeEach(() => {
     handler: jest.fn(),
     read: jest.fn().mockReturnValue(Promise.resolve('mockState')),
     write: jest.fn().mockReturnValue(Promise.resolve()),
-  };  
+  };
 });
 
 afterEach(() => {
@@ -19,25 +20,25 @@ afterEach(() => {
   central = null;
 });
 
-test('syncState', () => { 
-  const { syncState } = Actions(central, TYPES);  
+test('syncState', () => {
+  const { syncState } = Actions(central, TYPES);
   const action = syncState('mockState');
 
-  expect(action).toEqual({ 
-    type: TYPES.BLUETOOTH_SYNC, 
-    payload: 'mockState' 
+  expect(action).toEqual({
+    type: TYPES.BLUETOOTH_SYNC,
+    payload: 'mockState',
   });
 });
 
-test('connectStore', () => { 
-  const { connectStore } = Actions(central, TYPES);  
+test('connectStore', () => {
+  const { connectStore } = Actions(central, TYPES);
   expect.assertions(6);
 
-  const promise = connectStore('mockName')(dispatch).then(_ => { 
+  const promise = connectStore('mockName')(dispatch).then(() => {
     expect(central.connect).toBeCalled();
     expect(central.handler).toBeCalled();
 
-    expect(dispatch.mock.calls.length).toBe(2); 
+    expect(dispatch.mock.calls.length).toBe(2);
     expect(dispatch.mock.calls[0][0]).toEqual({ type: TYPES.BLUETOOTH_CONNECTING });
     expect(dispatch.mock.calls[1][0]).toEqual({ type: TYPES.BLUETOOTH_CONNECTED });
 
@@ -47,11 +48,11 @@ test('connectStore', () => {
   return expect(promise).resolves.toBe(true);
 });
 
-test('syncStore', () => { 
+test('syncStore', () => {
   const { syncStore } = Actions(central, TYPES);
   expect.assertions(3);
 
-  const promise = syncStore()(dispatch).then(_ => { 
+  const promise = syncStore()(dispatch).then(() => {
     expect(central.read).toBeCalled();
     expect(dispatch).toBeCalledWith({ type: TYPES.BLUETOOTH_SYNC, payload: 'mockState' });
 
@@ -61,11 +62,11 @@ test('syncStore', () => {
   return expect(promise).resolves.toBe(true);
 });
 
-test('sendAction', () => { 
+test('sendAction', () => {
   const { sendAction } = Actions(central, TYPES);
   expect.assertions(2);
 
-  const promise = sendAction('mockAction')(dispatch).then(_ => { 
+  const promise = sendAction('mockAction')(dispatch).then(() => {
     expect(central.write).toBeCalledWith('mockAction');
 
     return true;

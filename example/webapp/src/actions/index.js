@@ -4,6 +4,6 @@ export function increment() {
   return { type: TYPES.INCREMENT };
 }
 
-export function decrement() { 
+export function decrement() {
   return { type: TYPES.DECREMENT };
 }

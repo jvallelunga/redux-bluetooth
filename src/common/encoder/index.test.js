@@ -1,10 +1,11 @@
+/* global test, expect */
 import TextEncoding from 'text-encoding';
 
 import Encoder from '.';
 
-const { encode , decode } = new Encoder(TextEncoding);
+const { encode, decode } = new Encoder(TextEncoding);
 
-test('encode / decode', () => { 
+test('encode / decode', () => {
   const data = encode({ type: 'TEST', payload: 'PAYLOAD' });
   const result = decode(data);
 

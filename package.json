@@ -5,6 +5,8 @@
   "main": "build/index.js",
   "scripts": {
     "dev": "watch 'npm run build' src",
+    "eslint": "eslint src",
+    "prebuild": "npm run eslint",
     "build": "babel src -d build",
     "test": "jest",
     "test:watch": "npm test -- --watch",
@@ -39,12 +41,19 @@
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-preset-latest": "^6.24.1",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.0.2",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.1.0",
     "jest": "^20.0.4",
     "np": "^2.16.0",
     "watch": "^1.0.2"
   },
   "dependencies": {
     "bleno": "^0.4.2",
+    "redux": "^3.7.1",
+    "redux-thunk": "^2.2.0",
     "text-encoding": "^0.6.4"
   }
 }

@@ -5,9 +5,7 @@ import { increment, decrement } from '../actions';
 
 import Component from './component';
 
-const mapState = (state) => {
-  return state;
-}
+const mapState = state => state;
 
 const mapAction = {
   onConnect: actions.connectStore,

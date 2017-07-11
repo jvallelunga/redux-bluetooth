@@ -1,8 +1,9 @@
-import actions from '../actions';
-const { sendAction } = actions;
+import ACTIONS from '../actions';
 
-export default (actions = []) => store => next => action => {
+const { sendAction } = ACTIONS;
+
+export default (actions = []) => store => next => (action) => {
   const { type } = action;
-  actions.includes(type) && store.dispatch(sendAction(action)); 
+  if (actions.includes(type)) store.dispatch(sendAction(action));
   return next(action);
-}
+};

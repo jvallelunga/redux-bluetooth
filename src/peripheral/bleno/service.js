@@ -1,12 +1,7 @@
-export default function Service(
-  uuid,
-  Parent,
-  util,
-  characteristic) {
-
+export default function Service(uuid, Parent, util, characteristic) {
   function ReduxService() {
-    Parent.call(this, { 
-      uuid, 
+    Parent.call(this, {
+      uuid,
       characteristics: [characteristic],
     });
   }
