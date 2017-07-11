@@ -7,8 +7,8 @@ addons:
       - python
       - cmake
       - build-essential
-      - gcc
-      - g++
+      - gcc-5.1 
+      - g++-5.1
 before_install: 
   - npm install -g node-gyp
 script:
