@@ -15,7 +15,6 @@ console.log(dummy());
 # TODO 
 
 - redux-observable
-- CI: CircleCI | Travis
 - Coverage: Coverall | https://codecov.io/
 - bundlesize
 - Badges: ci, coverage, npm
