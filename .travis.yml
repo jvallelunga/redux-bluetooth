@@ -13,9 +13,17 @@ addons:
     - g++-4.8
 script:
   - npm run test
+  - npm run example:webapp:build
 branches:
   only:
     - master
 cache:
   directories:
   - node_modules
+deploy:
+ provider: pages
+ skip_cleanup: true
+ github_token: $GITHUB_TOKEN
+ local_dir: example/webapp/build
+ on:
+   branch: master

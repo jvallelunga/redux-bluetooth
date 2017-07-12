@@ -11,7 +11,13 @@
     "test": "jest --config .jest.json",
     "test:watch": "npm test -- --watch",
     "prepublish": "npm run build",
-    "release": "np"
+    "release": "np",
+    "example:peripheral:start": "cd example/peripheral && npm start",
+    "example:webapp:build": "cd example/webapp && npm run build",
+    "example:webapp:deploy": "cd example/webapp && npm run deploy",
+    "example:start": "npm run example:peripheral:start" ,
+    "example:build": "npm run example:webapp:build",
+    "example:deploy": "npm run example:webapp:deploy"
   },
   "babel": {
     "presets": [
