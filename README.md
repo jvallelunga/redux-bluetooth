@@ -16,9 +16,7 @@ console.log(dummy());
 
 
 # TODO 
-
+- dotenv
 - bundlesize
 - Prepack
-- redux-observable
-- Badges: ci, coverage, npm
 - https://greenkeeper.io/

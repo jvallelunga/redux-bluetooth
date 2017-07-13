@@ -1,9 +1,7 @@
 import * as TYPES from '../actions/types';
 import * as STATUS from '../central/status';
 
-const initial = {
-  status: STATUS.INIT,
-};
+import initial from './initial';
 
 export default (autosync = true) => (state = initial, { type, payload }) => {
   switch (type) {
