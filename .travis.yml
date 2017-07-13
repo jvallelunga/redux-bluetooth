@@ -10,7 +10,7 @@ addons:
     - gcc-4.8
     - g++-4.8
 script:
-  - npm run test:coverage
+  - npm run test
   # - npm run example:ci
 branches:
   only:
@@ -27,4 +27,4 @@ cache:
 #  on:
 #    branch: master
 after_success: 
-  - bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION
+  - npm run test:coverage && bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION

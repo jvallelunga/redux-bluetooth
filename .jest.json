@@ -1,4 +1,3 @@
 {
-  "testPathIgnorePatterns": ["/build/"],
-  "collectCoverageFrom": ["src/**/*.js"]  
+  "testPathIgnorePatterns": ["/src/"]
 }
