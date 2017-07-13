@@ -12,6 +12,7 @@
     "test:ci": "jest --config .jest.ci.json",
     "test:watch": "npm test -- --watch",
     "test:coverage": "npm test -- --coverage",
+    "test:coverage:ci": "npm run test:coverage && codecov -t $CODECOV_TOKEN",
     "prepublish": "npm run build",
     "release": "np",
     "example:peripheral:install": "cd example/peripheral && npm install",

@@ -1,4 +1,4 @@
-/* global jest, beforeEach, afterEach, test, expect */
+/* global test, expect */
 import Reducer from '.';
 
 test('type: UNKNOWN', () => {

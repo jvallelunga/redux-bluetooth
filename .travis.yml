@@ -27,4 +27,4 @@ deploy:
  on:
    branch: master
 after_success: 
-  - npm run test:coverage && codecov -t $CODECOV_TOKEN
+  - npm run test:coverage:ci
