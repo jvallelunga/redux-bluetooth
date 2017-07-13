@@ -18,6 +18,8 @@
     "example:webapp:install": "cd example/webapp && npm install",
     "example:webapp:build": "cd example/webapp && npm run build",
     "example:webapp:deploy": "cd example/webapp && npm run deploy",
+    "preexample:install": "npm run example:peripheral:install",
+    "example:install": "npm run example:webapp:install",
     "example:start": "npm run example:peripheral:start",
     "example:deploy": "npm run example:webapp:deploy",
     "preexample:ci": "npm run example:webapp:install",

@@ -40,6 +40,6 @@
   },
   "dependencies": {
     "redux": "^3.7.1",
-    "redux-bluetooth": "file:../../"
+    "redux-bluetooth": "^0.1.1"
   }
 }
