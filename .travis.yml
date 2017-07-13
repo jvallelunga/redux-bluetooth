@@ -10,7 +10,7 @@ addons:
     - gcc-4.8
     - g++-4.8
 script:
-  - npm run test
+  - npm run test:coverage
   - npm run example:ci
 branches:
   only:
@@ -27,5 +27,4 @@ deploy:
  on:
    branch: master
 after_success: 
-  - npm run test:coverage
   - codecov
