@@ -17,6 +17,7 @@ console.log(dummy());
 
 # TODO 
 - dotenv
+- https://github.com/vadimdemedes/ink
 - bundlesize
 - Prepack
 - https://greenkeeper.io/
