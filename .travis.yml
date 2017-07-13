@@ -18,6 +18,7 @@ branches:
 cache:
   directories:
   - node_modules
+  - example/webapp/node_modules
 deploy:
  provider: pages
  skip_cleanup: true
