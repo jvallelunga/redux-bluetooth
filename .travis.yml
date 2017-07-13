@@ -17,8 +17,8 @@ branches:
     - master
 cache:
   directories:
-  - node_modules
-  - example/webapp/node_modules
+    - node_modules
+    - example/webapp/node_modules
 deploy:
  provider: pages
  skip_cleanup: true
@@ -27,4 +27,4 @@ deploy:
  on:
    branch: master
 after_success: 
-  - codecov
+  - bash <(curl -s https://codecov.io/bash) -e TRAVIS_NODE_VERSION

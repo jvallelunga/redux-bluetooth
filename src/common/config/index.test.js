@@ -1,0 +1,17 @@
+/* global test, expect */
+import { CENTRAL_CONFIG, BLENO_CONFIG } from '.';
+
+test('config central', () => {
+  expect(CENTRAL_CONFIG).toEqual({
+    SERVICE_UUID: '13333333-3333-3333-3333-333333333337',
+    CHARACTERISTIC_UUID: '13333333-3333-3333-3333-333333330001',
+  });
+});
+
+test('config bleno', () => {
+  expect(BLENO_CONFIG).toEqual({
+    SERVICE_UUID: '13333333333333333333333333333337',
+    CHARACTERISTIC_UUID: '13333333333333333333333333330001',
+    DESCRIPTOR_UUID: '2901',
+  });
+});

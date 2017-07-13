@@ -20,6 +20,5 @@ console.log(dummy());
 - bundlesize
 - Prepack
 - redux-observable
-- Coverage: Coverall | https://codecov.io/
 - Badges: ci, coverage, npm
 - https://greenkeeper.io/
