@@ -9,6 +9,7 @@
     "prebuild": "npm run eslint",
     "build": "babel src -d build",
     "test": "jest --config .jest.json",
+    "test:coverage": "npm test -- --coverage",
     "test:watch": "npm test -- --watch",
     "prepublish": "npm run build",
     "release": "np",
