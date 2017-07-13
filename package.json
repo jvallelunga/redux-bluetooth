@@ -19,7 +19,9 @@
     "example:webapp:build": "cd example/webapp && npm run build",
     "example:webapp:deploy": "cd example/webapp && npm run deploy",
     "example:start": "npm run example:peripheral:start" ,
-    "example:deploy": "npm run example:webapp:deploy"
+    "example:deploy": "npm run example:webapp:deploy",
+    "preexample:ci": "npm run example:webapp:install",  
+    "example:ci": "npm run example:webapp:build"
   },
   "babel": {
     "presets": [
