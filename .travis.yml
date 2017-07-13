@@ -10,7 +10,7 @@ addons:
     - gcc-4.8
     - g++-4.8
 script:
-  - npm run test
+  - npm run test:ci
   # - npm run example:ci
 branches:
   only:
