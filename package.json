@@ -12,11 +12,13 @@
     "test:watch": "npm test -- --watch",
     "prepublish": "npm run build",
     "release": "np",
+    "example:peripheral:install": "cd example/peripheral && npm install",
+    "example:peripheral:build": "cd example/peripheral && npm run build",
     "example:peripheral:start": "cd example/peripheral && npm start",
+    "example:webapp:install": "cd example/webapp && npm install", 
     "example:webapp:build": "cd example/webapp && npm run build",
     "example:webapp:deploy": "cd example/webapp && npm run deploy",
     "example:start": "npm run example:peripheral:start" ,
-    "example:build": "npm run example:webapp:build",
     "example:deploy": "npm run example:webapp:deploy"
   },
   "babel": {

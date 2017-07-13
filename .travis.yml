@@ -13,6 +13,7 @@ addons:
     - g++-4.8
 script:
   - npm run test
+  - npm run example:webapp:install
   - npm run example:webapp:build
 branches:
   only:
@@ -20,6 +21,7 @@ branches:
 cache:
   directories:
   - node_modules
+  - example/webapp/node_modules
 deploy:
  provider: pages
  skip_cleanup: true
