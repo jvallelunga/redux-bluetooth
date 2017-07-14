@@ -14,8 +14,13 @@ console.log(dummy());
 // hello world!
 ```
 
+## Development
+PRs are welcome. To begin developing, do this:
+```shell
+$ yarn install # or npm install
+```
 
-# TODO 
+# TODO
 - dotenv
 - https://github.com/vadimdemedes/ink
 - bundlesize
