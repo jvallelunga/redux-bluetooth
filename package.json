@@ -14,7 +14,7 @@
     "test:watch": "npm test -- --watch",
     "test:coverage": "npm test -- --coverage",
     "prepublish": "npm run build",
-    "release": "np",
+    "release": "np --no-yarn",
     "preexample:install": "npm run example:peripheral:install",
     "example:install": "npm run example:webapp:install",
     "example:start": "npm run example:peripheral:start",
