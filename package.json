@@ -8,34 +8,29 @@
     "eslint": "eslint src",
     "prebuild": "npm run eslint",
     "build": "babel src -d build",
-    "test": "jest --config .jest.json",
+    "test": "jest --config .jest.json && npm run test:bundlesize",
     "test:watch": "npm test -- --watch",
     "test:coverage": "npm test -- --coverage",
     "prepublish": "npm run build",
+    "test:bundlesize": "bundlesize",
     "release": "np",
-    
     "preexample:install": "npm run example:peripheral:install",
     "example:install": "npm run example:webapp:install",
     "example:start": "npm run example:peripheral:start",
     "example:deploy": "npm run example:webapp:deploy",
-    
     "example:webapp:install": "cd example/webapp && npm install",
     "example:webapp:build": "cd example/webapp && npm run build",
     "example:webapp:deploy": "cd example/webapp && npm run deploy",
-    
     "example:peripheral:install": "cd example/peripheral && npm install",
     "example:peripheral:build": "cd example/peripheral && npm run build",
     "example:peripheral:start": "cd example/peripheral && npm start",
-    
-    "test:ci": "jest --config .jest.ci.json",
+    "test:ci": "jest --config .jest.ci.json && npm run test:bundlesize",
     "test:coverage:ci": "npm run test:coverage && codecov -t $CODECOV_TOKEN",
     "preexample:ci": "npm run example:webapp:install",
     "example:ci": "npm run example:webapp:build"
   },
   "babel": {
-    "presets": [
-      "latest"
-    ]
+    "presets": ["latest"]
   },
   "repository": {
     "type": "git",
@@ -76,5 +71,11 @@
     "redux": "^3.7.1",
     "redux-thunk": "^2.2.0",
     "text-encoding": "^0.6.4"
-  }
+  },
+  "bundlesize": [
+    {
+      "path": "./build/**.js",
+      "maxSize": "2 Kb"
+    }
+  ]
 }
