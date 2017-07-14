@@ -1,0 +1,1 @@
+babel configuration is important to run `ink`

@@ -1,7 +1,4 @@
 export default function counter(state = 0, { type }) {
-  console.log('Counter: ---------------------------');
-  console.log(type);
-  console.log(state);
   switch (type) {
     case 'INCREMENT':
       return state + 1;

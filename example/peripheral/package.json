@@ -13,7 +13,15 @@
   },
   "babel": {
     "presets": [
-      "latest"
+      "es2015-node5"
+    ],
+    "plugins": [
+      [
+        "transform-react-jsx",
+        {
+          "pragma": "h"
+        }
+      ]
     ]
   },
   "repository": {
@@ -34,11 +42,14 @@
   "homepage": "https://github.com/jvallelunga/redux-bluetooth#readme",
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-preset-latest": "^6.24.1",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-es2015-node5": "^1.2.0",
     "jest": "^20.0.4",
     "watch": "^1.0.2"
   },
   "dependencies": {
+    "ink": "^0.1.2",
+    "ink-redux": "^1.0.0",
     "redux": "^3.7.1",
     "redux-bluetooth": "^0.1.1"
   }
