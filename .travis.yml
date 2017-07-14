@@ -11,7 +11,8 @@ addons:
     - g++-4.8
 script:
   - npm run test:ci
-  - npm run example:ci
+  - npm run test:bundlesize:ci
+  - npm run example:deploy:ci
 branches:
   only:
     - master
