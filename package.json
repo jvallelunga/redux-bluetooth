@@ -26,14 +26,16 @@
     "example:peripheral:build": "cd example/peripheral && npm run build",
     "example:peripheral:start": "cd example/peripheral && npm start",
     "test:ci": "jest --config .jest.ci.json",
-    "pretest:coverage:ci": "npm run test:coverage", 
+    "pretest:coverage:ci": "npm run test:coverage",
     "test:coverage:ci": "codecov -t $CODECOV_TOKEN",
     "test:bundlesize:ci": "bundlesize",
     "preexample:deploy:ci": "npm run example:webapp:install",
     "example:deploy:ci": "npm run example:webapp:build"
   },
   "babel": {
-    "presets": ["latest"]
+    "presets": [
+      "latest"
+    ]
   },
   "repository": {
     "type": "git",
@@ -59,6 +61,7 @@
     "babel-cli": "^6.24.1",
     "babel-jest": "^20.0.3",
     "babel-preset-latest": "^6.24.1",
+    "bundlesize": "^0.11.2",
     "codecov": "^2.2.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.2",
