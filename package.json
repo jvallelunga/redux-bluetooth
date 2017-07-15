@@ -1,29 +1,28 @@
 {
   "name": "redux-bluetooth",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Redux middleware to dispatch actions via bluetooth to a peripheral store",
   "main": "build/index.js",
   "scripts": {
     "dev": "watch 'npm run build' src",
     "eslint": "eslint src",
     "tmp": "cp -R build/ .tmp",
-      "precopy": "if [ ! -d build ]; then npm run build; fi",
-      "postcopy": "find .tmp -type f -name '*.test.js' -delete",
+    "precopy": "if [ ! -d build ]; then npm run build; fi",
+    "postcopy": "find .tmp -type f -name '*.test.js' -delete",
     "uglify": "uglifyjs ./.tmp/**/*.js -m -c -o bundle.js",
-      "preuglify": "npm run tmp",
+    "preuglify": "npm run tmp",
     "build": "babel src -d build",
-      "prebuild": "npm run eslint",
+    "prebuild": "npm run eslint",
     "test": "jest --config .jest.json",
     "test:bundlesize": "bundlesize",
-      "pretest:bundlesize": "npm run uglify",
-      "posttest:bundlesize": "rm -fR .tmp bundle.js",
+    "pretest:bundlesize": "npm run uglify",
+    "posttest:bundlesize": "rm -fR .tmp bundle.js",
     "test:watch": "npm test -- --watch",
     "test:coverage": "npm test -- --coverage",
     "prepublish": "npm run build",
     "release": "np",
-
     "example:install": "npm run example:webapp:install",
-      "preexample:install": "npm run example:peripheral:install",
+    "preexample:install": "npm run example:peripheral:install",
     "example:start": "npm run example:peripheral:start",
     "example:deploy": "npm run example:webapp:deploy",
     "example:webapp:install": "cd example/webapp && yarn install",
@@ -32,13 +31,12 @@
     "example:peripheral:install": "cd example/peripheral && yarn install",
     "example:peripheral:build": "cd example/peripheral && npm run build",
     "example:peripheral:start": "cd example/peripheral && npm start",
-
     "test:ci": "jest --config .jest.ci.json",
     "test:coverage:ci": "codecov -t $CODECOV_TOKEN",
-      "pretest:coverage:ci": "npm run test:coverage",
+    "pretest:coverage:ci": "npm run test:coverage",
     "test:bundlesize:ci": "npm run test:bundlesize",
     "example:deploy:ci": "npm run example:webapp:build",
-      "preexample:deploy:ci": "npm run example:webapp:install"
+    "preexample:deploy:ci": "npm run example:webapp:install"
   },
   "babel": {
     "presets": [
