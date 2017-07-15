@@ -1,3 +1,5 @@
-import bleno from './bleno';
+import BLUETOOTH from './bleno';
+import STORE from './store';
 
-export default (name, store) => bleno.start(name, store);
+export const bluetooth = BLUETOOTH;
+export const connectSyncStore = STORE(BLUETOOTH);

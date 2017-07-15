@@ -1,11 +1,12 @@
 /* global jest, test, expect */
-import peripheral from '.';
+import * as peripheral from '.';
 
-jest.mock('./bleno', () => ({
-  start: jest.fn().mockReturnValue('mockStart'),
-}));
+jest.mock('./bleno', () => null);
+jest.mock('./store', () => () => null);
 
-test('peripheral', () => {
-  const result = peripheral(null, null);
-  expect(result).toEqual('mockStart');
+test('actions', () => {
+  expect(Object.keys(peripheral)).toEqual([
+    'bluetooth',
+    'connectSyncStore',
+  ]);
 });
