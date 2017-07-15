@@ -6,41 +6,46 @@
   "scripts": {
     "dev": "watch 'npm run build' src",
     "eslint": "eslint src",
-    "prebuild": "npm run eslint",
+    "tmp": "cp -R build/ .tmp",
+      "precopy": "if [ ! -d build ]; then npm run build; fi",
+      "postcopy": "find .tmp -type f -name '*.test.js' -delete",
+    "uglify": "uglifyjs ./.tmp/**/*.js -m -c -o bundle.js",
+      "preuglify": "npm run tmp",
     "build": "babel src -d build",
+      "prebuild": "npm run eslint",
     "test": "jest --config .jest.json",
-    "pretest:bundlesize": "npm run build",
     "test:bundlesize": "bundlesize",
+      "pretest:bundlesize": "npm run uglify",
+      "posttest:bundlesize": "rm -fR .tmp bundle.js",
     "test:watch": "npm test -- --watch",
     "test:coverage": "npm test -- --coverage",
     "prepublish": "npm run build",
     "release": "np --no-yarn",
-    "preexample:install": "npm run example:peripheral:install",
+
     "example:install": "npm run example:webapp:install",
+      "preexample:install": "npm run example:peripheral:install",
     "example:start": "npm run example:peripheral:start",
     "example:deploy": "npm run example:webapp:deploy",
-    "example:webapp:install": "cd example/webapp && npm install",
+    "example:webapp:install": "cd example/webapp && yarn install",
     "example:webapp:build": "cd example/webapp && npm run build",
     "example:webapp:deploy": "cd example/webapp && npm run deploy",
-    "example:peripheral:install": "cd example/peripheral && npm install",
+    "example:peripheral:install": "cd example/peripheral && yarn install",
     "example:peripheral:build": "cd example/peripheral && npm run build",
     "example:peripheral:start": "cd example/peripheral && npm start",
+
     "test:ci": "jest --config .jest.ci.json",
-    "pretest:coverage:ci": "npm run test:coverage",
     "test:coverage:ci": "codecov -t $CODECOV_TOKEN",
-    "test:bundlesize:ci": "bundlesize",
-    "preexample:deploy:ci": "npm run example:webapp:install",
-    "example:deploy:ci": "npm run example:webapp:build"
+      "pretest:coverage:ci": "npm run test:coverage",
+    "test:bundlesize:ci": "npm run test:bundlesize",
+    "example:deploy:ci": "npm run example:webapp:build",
+      "preexample:deploy:ci": "npm run example:webapp:install"
   },
   "babel": {
     "presets": [
       "latest"
     ]
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/jvallelunga/redux-bluetooth.git"
-  },
+  "repository": "git+ssh://git@github.com/jvallelunga/redux-bluetooth.git",
   "keywords": [
     "redux",
     "middleware",
@@ -70,6 +75,7 @@
     "eslint-plugin-react": "^7.1.0",
     "jest": "^20.0.4",
     "np": "^2.16.0",
+    "uglify-js": "^3.0.24",
     "watch": "^1.0.2"
   },
   "dependencies": {
@@ -80,7 +86,7 @@
   },
   "bundlesize": [
     {
-      "path": "./build/**.js",
+      "path": "bundle.js",
       "maxSize": "2 Kb"
     }
   ]
