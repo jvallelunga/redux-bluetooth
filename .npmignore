@@ -1,3 +1,7 @@
 src
 example
+coverage
+docs
+yarn.lock
 *.test.js
+README.md
