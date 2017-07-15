@@ -20,7 +20,7 @@
     "test:watch": "npm test -- --watch",
     "test:coverage": "npm test -- --coverage",
     "prepublish": "npm run build",
-    "release": "np --no-yarn",
+    "release": "np",
 
     "example:install": "npm run example:webapp:install",
       "preexample:install": "npm run example:peripheral:install",
