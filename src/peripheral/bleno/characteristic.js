@@ -6,24 +6,10 @@ export default function Characteristic(uuid, Parent, util, descriptor, { encode,
       descriptors: [descriptor],
     });
 
-    this.store = null;
+    this.state = null;
   }
 
   util.inherits(ReduxCharacteristic, Parent);
-
-  ReduxCharacteristic.prototype.connect = function (store) {
-    this.store = store;
-    this.store.subscribe(() => {
-      if (this.updateValueCallback && this.store) {
-        const state = this.store.getState();
-        this.updateValueCallback(encode(state));
-      }
-    });
-  };
-
-  ReduxCharacteristic.prototype.disconnect = function () {
-    this.store = null;
-  };
 
   ReduxCharacteristic.prototype.onWriteRequest =
   function (data, offset, withoutResponse, callback) {
@@ -32,7 +18,7 @@ export default function Characteristic(uuid, Parent, util, descriptor, { encode,
       return;
     }
 
-    if (this.store) this.store.dispatch(decode(data));
+    this.onAction(decode(data));
 
     callback(this.RESULT_SUCCESS);
   };
@@ -47,7 +33,7 @@ export default function Characteristic(uuid, Parent, util, descriptor, { encode,
       callback(this.RESULT_SUCCESS, null);
       return;
     }
-    callback(this.RESULT_SUCCESS, encode(this.store.getState()));
+    callback(this.RESULT_SUCCESS, this.state);
   };
 
   ReduxCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
@@ -56,6 +42,17 @@ export default function Characteristic(uuid, Parent, util, descriptor, { encode,
 
   ReduxCharacteristic.prototype.onUnsubscribe = function () {
     this.updateValueCallback = null;
+  };
+
+  ReduxCharacteristic.prototype.onAction = function () {
+    return true;
+  };
+
+  ReduxCharacteristic.prototype.updateState = function (state) {
+    this.state = encode(state);
+    if (this.updateValueCallback) {
+      this.updateValueCallback(this.state);
+    }
   };
 
   return new ReduxCharacteristic();

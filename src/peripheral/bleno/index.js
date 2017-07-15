@@ -22,27 +22,37 @@ export function Bleno(bleno, encoder, { SERVICE_UUID, CHARACTERISTIC_UUID, DESCR
 
   const service = Service(SERVICE_UUID, bleno.PrimaryService, util, characteristic);
 
-  const start = (name, store) => {
-    bleno.on('stateChange', (state) => {
-      if (state === 'poweredOn') {
+  const start = (name, state) => {
+    bleno.on('stateChange', (status) => {
+      if (status === 'poweredOn') {
         bleno.startAdvertising(name, [SERVICE_UUID], (err) => {
-          if (err) console.log('startAdvertising.err: ', err);
+          if (!err) characteristic.updateState(state);
         });
       } else {
         bleno.stopAdvertising();
-        characteristic.disconnect();
       }
     });
 
     bleno.on('advertisingStart', (err) => {
       if (!err) {
         bleno.setServices([service]);
-        characteristic.connect(store);
       }
     });
   };
 
-  return { start };
+  const handler = (callback) => {
+    characteristic.onAction = callback;
+  };
+
+  const notify = (state) => {
+    characteristic.updateState(state);
+  };
+
+  return {
+    start,
+    handler,
+    notify,
+  };
 }
 
 export default new Bleno(BLENO, Encoder(TextEncoding), BLENO_CONFIG);
