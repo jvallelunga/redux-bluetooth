@@ -29,10 +29,6 @@ export default function Characteristic(uuid, Parent, util, descriptor, { encode,
       return;
     }
 
-    if (!this.store) {
-      callback(this.RESULT_SUCCESS, null);
-      return;
-    }
     callback(this.RESULT_SUCCESS, this.state);
   };
 

@@ -19,10 +19,3 @@ PRs are welcome. To begin developing, do this:
 ```shell
 $ yarn install # or npm install
 ```
-
-# TODO
-- [ ] dotenv
-- [ ] https://github.com/vadimdemedes/ink
-- [x] bundlesize
-- [ ] Prepack
-- [ ] https://greenkeeper.io/

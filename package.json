@@ -18,7 +18,7 @@
     "pretest:bundlesize": "npm run uglify",
     "posttest:bundlesize": "rm -fR .tmp bundle.js",
     "test:watch": "npm test -- --watch",
-    "test:coverage": "npm test -- --coverage",
+    "test:coverage": "npm test -- --coverage --forceExit",
     "prepublish": "npm run build",
     "release": "np",
     "example:install": "npm run example:webapp:install",
