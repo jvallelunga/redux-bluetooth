@@ -1,4 +1,4 @@
-/* global jest, test, expect, beforeEach */
+/* global jest, test, expect, beforeEach, afterEach */
 import util from 'util';
 import bleno from 'bleno';
 
@@ -16,6 +16,11 @@ let decode = null;
 beforeEach(() => {
   encode = jest.fn().mockReturnValue('mockEncode');
   decode = jest.fn().mockReturnValue('mockDecode');
+});
+
+afterEach(() => {
+  encode = null;
+  decode = null;
 });
 
 test('new Characteristic', () => {

@@ -11,3 +11,11 @@ test('encode / decode', () => {
 
   expect(result).toEqual({ type: 'TEST', payload: 'PAYLOAD' });
 });
+
+
+test('encode / decode: string', () => {
+  const data = encode('{ "type": "TEST", "payload": "PAYLOAD" }');
+  const result = decode(data);
+
+  expect(result).toEqual({ type: 'TEST', payload: 'PAYLOAD' });
+});

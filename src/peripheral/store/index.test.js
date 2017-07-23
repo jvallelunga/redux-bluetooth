@@ -1,4 +1,4 @@
-/* global jest, test, expect, beforeEach */
+/* global jest, test, expect, beforeEach, afterEach */
 import connectSyncStore from '.';
 
 let store = null;
@@ -16,6 +16,11 @@ beforeEach(() => {
     getState: jest.fn().mockReturnValue('mockState'),
     dispatch: jest.fn(),
   };
+});
+
+afterEach(() => {
+  store = null;
+  bleno = null;
 });
 
 test('connectSyncStore', () => {
