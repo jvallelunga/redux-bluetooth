@@ -1,12 +1,11 @@
 /* global window */
 import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
 
 import middleware from '../middleware';
 import reducers from '../reducers';
 
 export default (actions) => {
-  const middlewares = [middleware(actions), thunk];
+  const middlewares = [middleware(actions)];
   const enhancers = [applyMiddleware(...middlewares)];
 
   /* eslint-disable no-underscore-dangle */

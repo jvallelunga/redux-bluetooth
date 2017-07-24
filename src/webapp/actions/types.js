@@ -4,3 +4,7 @@ export const BLUETOOTH_ERROR = '@@bluetooth/ERROR';
 export const BLUETOOTH_READ = '@@bluetooth/READ';
 export const BLUETOOTH_SYNC = '@@bluetooth/SYNC';
 export const BLUETOOTH_SEND = '@@bluetooth/SEND';
+
+export const BLUETOOTH_CONNECT_REQUEST = '@@bluetooth/CONNECT_REQUEST';
+export const BLUETOOTH_SEND_REQUEST = '@@bluetooth/SEND_REQUEST';
+export const BLUETOOTH_SYNC_REQUEST = '@@bluetooth/SYNC_REQUEST';
