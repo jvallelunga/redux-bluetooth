@@ -10,9 +10,8 @@ addons:
     - gcc-4.8
     - g++-4.8
 script:
-  - npm run test:ci
-  - npm run test:bundlesize:ci
-  - npm run example:deploy:ci
+  - npm run ci:test
+  - npm run ci:example:build
 branches:
   only:
     - master
@@ -28,4 +27,4 @@ deploy:
  on:
    branch: master
 after_success: 
-  - npm run test:coverage:ci
+  - npm run ci:report:coverage

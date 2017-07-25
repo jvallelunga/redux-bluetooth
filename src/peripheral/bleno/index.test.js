@@ -8,6 +8,7 @@ let decode = null;
 let mockCharacteristic = null;
 let BLENO = null;
 
+jest.mock('bleno', () => jest.fn());
 jest.mock('./service', () => jest.fn().mockReturnValue('mockService'));
 jest.mock('./characteristic', () => () => mockCharacteristic);
 jest.mock('./descriptor', () => jest.fn());
