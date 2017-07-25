@@ -32,9 +32,12 @@ test('syncState', () => {
 
 test('connectStore', () => {
   const { connectStore } = Actions(central, TYPES);
-  expect.assertions(8);
+  const action = connectStore('mockName');
+  expect.assertions(10);
 
-  const promise = connectStore('mockName')(dispatch).then(() => {
+  expect(action.type).toEqual(TYPES.BLUETOOTH_CONNECT_REQUEST);
+
+  const promise = action.request(dispatch).then(() => {
     expect(central.connect).toBeCalled();
     expect(central.handler).toBeCalled();
 
@@ -42,7 +45,9 @@ test('connectStore', () => {
     expect(dispatch.mock.calls[0][0]).toEqual({ type: TYPES.BLUETOOTH_CONNECTING });
     expect(dispatch.mock.calls[1][0]).toEqual({ type: TYPES.BLUETOOTH_CONNECTED });
 
-    return dispatch.mock.calls[2][0](dispatch); // syncStore
+    const syncStore = dispatch.mock.calls[2][0];
+    expect(syncStore.type).toEqual(TYPES.BLUETOOTH_SYNC_REQUEST);
+    return syncStore.request(dispatch);
   }).then(() => {
     expect(central.read).toBeCalled();
     expect(dispatch.mock.calls[3][0]).toEqual({ type: TYPES.BLUETOOTH_SYNC, payload: 'mockState' });
@@ -55,9 +60,12 @@ test('connectStore', () => {
 
 test('syncStore', () => {
   const { syncStore } = Actions(central, TYPES);
-  expect.assertions(3);
+  const action = syncStore();
+  expect.assertions(4);
 
-  const promise = syncStore()(dispatch).then(() => {
+  expect(action.type).toEqual(TYPES.BLUETOOTH_SYNC_REQUEST);
+
+  const promise = action.request(dispatch).then(() => {
     expect(central.read).toBeCalled();
     expect(dispatch).toBeCalledWith({ type: TYPES.BLUETOOTH_SYNC, payload: 'mockState' });
 
@@ -69,9 +77,12 @@ test('syncStore', () => {
 
 test('sendAction', () => {
   const { sendAction } = Actions(central, TYPES);
-  expect.assertions(2);
+  const action = sendAction('mockAction');
+  expect.assertions(3);
 
-  const promise = sendAction('mockAction')(dispatch).then(() => {
+  expect(action.type).toEqual(TYPES.BLUETOOTH_SEND_REQUEST);
+
+  const promise = action.request(dispatch).then(() => {
     expect(central.write).toBeCalledWith('mockAction');
 
     return true;

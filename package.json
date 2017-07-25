@@ -79,7 +79,6 @@
   "dependencies": {
     "bleno": "^0.4.2",
     "redux": "^3.7.1",
-    "redux-thunk": "^2.2.0",
     "text-encoding": "^0.6.4"
   },
   "bundlesize": [
