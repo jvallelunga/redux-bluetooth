@@ -5,24 +5,17 @@
   "main": "build/index.js",
   "scripts": {
     "dev": "watch 'npm run build' src",
-    "eslint": "eslint src",
-    "tmp": "cp -R build/ .tmp",
-    "precopy": "if [ ! -d build ]; then npm run build; fi",
-    "postcopy": "find .tmp -type f -name '*.test.js' -delete",
-    "uglify": "uglifyjs ./.tmp/**/*.js -m -c -o bundle.js",
-    "preuglify": "npm run tmp",
+    "lint": "eslint src",
     "build": "babel src -d build",
-    "prebuild": "npm run eslint",
-    "test": "jest --config .jest.json --forceExit",
+    "prebuild": "npm run lint",
+    "test": "jest --config .jest.json",
     "test:bundlesize": "bundlesize",
-    "pretest:bundlesize": "npm run uglify",
-    "posttest:bundlesize": "rm -fR .tmp bundle.js",
     "test:watch": "npm test -- --watch",
     "test:coverage": "npm test -- --coverage",
     "prepublish": "npm run build",
     "release": "np",
-    "example:install": "npm run example:webapp:install",
-    "preexample:install": "npm run example:peripheral:install",
+
+    "example:install": "npm run example:peripheral:install && npm run example:webapp:install",
     "example:start": "npm run example:peripheral:start",
     "example:deploy": "npm run example:webapp:deploy",
     "example:webapp:install": "cd example/webapp && yarn install",
@@ -31,12 +24,10 @@
     "example:peripheral:install": "cd example/peripheral && yarn install",
     "example:peripheral:build": "cd example/peripheral && npm run build",
     "example:peripheral:start": "cd example/peripheral && npm start",
-    "test:ci": "jest --config .jest.ci.json",
-    "test:coverage:ci": "codecov -t $CODECOV_TOKEN",
-    "pretest:coverage:ci": "npm run test:coverage",
-    "test:bundlesize:ci": "npm run test:bundlesize",
-    "example:deploy:ci": "npm run example:webapp:build",
-    "preexample:deploy:ci": "npm run example:webapp:install"
+
+    "ci:test": "jest --config .jest.ci.json",
+    "ci:report:coverage": "npm run test:coverage && codecov -t $CODECOV_TOKEN",
+    "ci:example:build": "npm run example:webapp:install && npm run example:webapp:build"
   },
   "babel": {
     "presets": [
@@ -73,7 +64,6 @@
     "eslint-plugin-react": "^7.1.0",
     "jest": "^20.0.4",
     "np": "^2.16.0",
-    "uglify-js": "^3.0.24",
     "watch": "^1.0.2"
   },
   "dependencies": {
