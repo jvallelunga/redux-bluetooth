@@ -14,7 +14,6 @@
     "test:coverage": "npm test -- --coverage",
     "prepublish": "npm run build",
     "release": "np",
-
     "example:install": "npm run example:peripheral:install && npm run example:webapp:install",
     "example:start": "npm run example:peripheral:start",
     "example:deploy": "npm run example:webapp:deploy",
@@ -24,7 +23,6 @@
     "example:peripheral:install": "cd example/peripheral && yarn install",
     "example:peripheral:build": "cd example/peripheral && npm run build",
     "example:peripheral:start": "cd example/peripheral && npm start",
-
     "ci:test": "jest ./build/",
     "ci:report:coverage": "npm run ci:test -- --coverage && codecov -t $CODECOV_TOKEN",
     "ci:example:build": "npm run example:webapp:install && npm run example:webapp:build"
