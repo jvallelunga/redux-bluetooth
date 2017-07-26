@@ -1,8 +1,8 @@
 <div align="center" markdown="1">
 
-<img src="docs/logo.jpg" alt="React Styleguidist" width="200">
+<img src="docs/logo.jpg" alt="React Bluetooth - Logo" width="200">
 <br/>
-<img src="docs/name.jpg" alt="React Styleguidist" width="500">
+<img src="docs/name.jpg" alt="React Bluetooth - Name" width="500">
 
 **Redux middleware to dispatch actions via bluetooth to a peripheral store**
 
