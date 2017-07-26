@@ -1,6 +1,6 @@
 {
   "name": "redux-bluetooth",
-  "version": "0.1.7",
+  "version": "0.1.10",
   "description": "Redux middleware to dispatch actions via bluetooth to a peripheral store",
   "main": "build/index.js",
   "scripts": {
@@ -25,8 +25,8 @@
     "example:peripheral:build": "cd example/peripheral && npm run build",
     "example:peripheral:start": "cd example/peripheral && npm start",
 
-    "ci:test": "jest --config .jest.ci.json",
-    "ci:report:coverage": "npm run test:coverage && codecov -t $CODECOV_TOKEN",
+    "ci:test": "jest ./build/",
+    "ci:report:coverage": "npm run ci:test -- --coverage && codecov -t $CODECOV_TOKEN",
     "ci:example:build": "npm run example:webapp:install && npm run example:webapp:build"
   },
   "babel": {
