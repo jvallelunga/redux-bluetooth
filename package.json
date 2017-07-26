@@ -9,10 +9,11 @@
     "build": "babel src -d build",
     "prebuild": "npm run lint",
     "test": "jest --config .jest.json",
-    "test:bundlesize": "bundlesize",
     "test:watch": "npm test -- --watch",
     "test:coverage": "npm test -- --coverage",
     "prepublish": "npm run build",
+    "bundlesize": "webpack && bundlesize",
+    "prerelease": "npm run bundlesize",
     "release": "np",
     "example:install": "npm run example:peripheral:install && npm run example:webapp:install",
     "example:start": "npm run example:peripheral:start",
@@ -24,6 +25,7 @@
     "example:peripheral:build": "cd example/peripheral && npm run build",
     "example:peripheral:start": "cd example/peripheral && npm start",
     "ci:test": "jest ./build/",
+    "ci:bundlesize": "npm run bundlesize",
     "ci:report:coverage": "npm run ci:test -- --coverage && codecov -t $CODECOV_TOKEN",
     "ci:example:build": "npm run example:webapp:install && npm run example:webapp:build"
   },
@@ -52,6 +54,7 @@
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-jest": "^20.0.3",
+    "babel-loader": "^7.1.1",
     "babel-preset-latest": "^6.24.1",
     "bundlesize": "^0.11.2",
     "codecov": "^2.2.0",
@@ -62,7 +65,8 @@
     "eslint-plugin-react": "^7.1.0",
     "jest": "^20.0.4",
     "np": "^2.16.0",
-    "watch": "^1.0.2"
+    "watch": "^1.0.2",
+    "webpack": "^3.4.1"
   },
   "dependencies": {
     "bleno": "^0.4.2",
@@ -71,8 +75,8 @@
   },
   "bundlesize": [
     {
-      "path": "bundle.js",
-      "maxSize": "2 Kb"
+      "path": "dist/redux-bluetooth.webapp.js",
+      "maxSize": "30 Kb"
     }
   ]
 }
