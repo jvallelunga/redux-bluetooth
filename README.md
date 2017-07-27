@@ -2,12 +2,13 @@
 
 <img src="docs/logo.jpg" alt="React Bluetooth - Logo" width="200">
 <br/>
-<img src="docs/name.jpg" alt="React Bluetooth - Name" width="500">
+<img src="https://raw.githubusercontent.com/jvallelunga/redux-bluetooth/HEAD/docs/name.jpg" alt="React Bluetooth - Name" width="500">
 
 **Redux middleware to dispatch actions via bluetooth to a peripheral store**
 
 [![Build Status](https://travis-ci.org/jvallelunga/redux-bluetooth.svg?branch=master)](https://travis-ci.org/jvallelunga/redux-bluetooth)
 [![codecov](https://codecov.io/gh/jvallelunga/redux-bluetooth/branch/master/graph/badge.svg)](https://codecov.io/gh/jvallelunga/redux-bluetooth)
+![gzip size](http://img.badgesize.io/https://raw.githubusercontent.com/jvallelunga/redux-bluetooth/master/dist/redux-bluetooth.webapp.js?compression=gzip&label=gzip%20size)
 
 </div>
 
