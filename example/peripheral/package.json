@@ -50,6 +50,7 @@
   "dependencies": {
     "ink": "^0.1.2",
     "ink-redux": "^1.0.0",
+    "prop-types": "^15.5.10",
     "redux": "^3.7.1",
     "redux-bluetooth": "^0.1.1"
   }

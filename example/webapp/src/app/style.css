@@ -12,8 +12,14 @@
   margin-bottom: 40px;
   line-height: calc(100vh - 200px);
   font-size: 80vh;
-  color: red;
+  color: black;
   text-align: center;
+}
+.app-counter--positive {
+  color: blue;
+}
+.app-counter--negative {
+  color: red;
 }
 
 .app-actions {

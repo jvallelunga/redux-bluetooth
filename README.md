@@ -14,6 +14,10 @@
 
 Redux Bluetooth is a project which consists in two components: **webapp** middleware, is a redux middleware to dispatch actions via [web bluetooth](https://developers.google.com/web/updates/2015/07/interact-with-ble-devices-on-the-web#user_gesture_required). **peripheral** store, is a redux store which process actions received over bluetooth and notify changes on every store change. 
 
+<div align="center" markdown="1">
+  <img src="docs/example.gif" alt="React Bluetooth - Example" width="600">
+</div>
+
 ## Install
 
 ```shell
