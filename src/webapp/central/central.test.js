@@ -4,7 +4,7 @@ import Central from './central';
 
 const encoder = {
   encode: jest.fn().mockReturnValue('mockEncode'),
-  decode: jest.fn().mockReturnValue('mockDecode'),
+  decode: jest.fn().mockReturnValue('[[[{"mockDecode":"mockDecode"}]]]'),
 };
 
 const characteristic = {
@@ -66,7 +66,7 @@ test('Central: handler', () => {
   .then((listerner) => {
     expect(characteristic.startNotifications).toBeCalled();
     listerner({ target: { value: 'mockEvent' } });
-    expect(callback).toBeCalledWith('mockDecode');
+    expect(callback).toBeCalledWith({ mockDecode: 'mockDecode' });
     return true;
   });
 
@@ -82,7 +82,7 @@ test('Central: read', () => {
     return data;
   });
 
-  return expect(promise).resolves.toBe('mockDecode');
+  return expect(promise).resolves.toBe('[[[{"mockDecode":"mockDecode"}]]]');
 });
 
 test('Central: write', () => {

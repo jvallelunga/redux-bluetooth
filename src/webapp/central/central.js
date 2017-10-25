@@ -5,6 +5,7 @@ export default function Central(
   const state = {
     server: null,
     characteristic: null,
+    message: '',
   };
 
   const connect = name => bluetooth
@@ -22,7 +23,18 @@ export default function Central(
       });
 
   const handler = callback => state.characteristic.startNotifications().then(() => {
-    const listerner = event => callback(decode(event.target.value));
+    const listerner = (event) => {
+      const chunk = decode(event.target.value);
+      const message = `${state.message}${chunk}`;
+
+      if (message.startsWith('[[[') && message.endsWith(']]]')) {
+        const json = JSON.parse(message.slice(3, message.length - 3));
+        callback(json);
+        state.message = '';
+      } else {
+        state.message = message;
+      }
+    };
     state.characteristic.addEventListener('characteristicvaluechanged', listerner);
     return listerner;
   });

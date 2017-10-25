@@ -16,7 +16,7 @@ let decode = null;
 
 beforeEach(() => {
   encode = jest.fn().mockReturnValue('mockEncode');
-  decode = jest.fn().mockReturnValue('mockDecode');
+  decode = jest.fn().mockReturnValue('{"mockDecode":"mockDecode"}');
 });
 
 afterEach(() => {
@@ -28,9 +28,8 @@ test('new Characteristic', () => {
   const characteristic = Characteristic('mockUUID', Parent, util, 'mockDescriptor', { encode, decode });
 
   expect(characteristic.uuid).toBe('mockUUID');
-  expect(characteristic.properties).toEqual(['read', 'write', 'notify']);
+  expect(characteristic.properties).toEqual(['write', 'notify']);
   expect(characteristic.descriptors).toEqual(['mockDescriptor']);
-  expect(characteristic.state).toBe(null);
 });
 
 test('Characteristic.onWriteRequest: RESULT_ATTR_NOT_LONG', () => {
@@ -51,33 +50,15 @@ test('Characteristic.onWriteRequest: RESULT_SUCCESS', () => {
   const spyOnAction = jest.spyOn(characteristic, 'onAction');
   characteristic.onWriteRequest(null, false, false, callback);
 
-  expect(spyOnAction).toBeCalledWith('mockDecode');
+  expect(spyOnAction).toBeCalledWith({ mockDecode: 'mockDecode' });
   expect(callback).toBeCalledWith('RESULT_SUCCESS');
 
   callback = jest.fn();
   characteristic.onAction = jest.fn();
   characteristic.onWriteRequest(null, false, false, callback);
 
-  expect(characteristic.onAction).toBeCalledWith('mockDecode');
+  expect(characteristic.onAction).toBeCalledWith({ mockDecode: 'mockDecode' });
   expect(callback).toBeCalledWith('RESULT_SUCCESS');
-});
-
-test('Characteristic.onReadRequest: RESULT_ATTR_NOT_LONG', () => {
-  const characteristic = Characteristic('mockUUID', Parent, util, 'mockDescriptor', { encode, decode });
-
-  const callback = jest.fn();
-  characteristic.onReadRequest(true, callback);
-
-  expect(callback).toBeCalledWith('RESULT_ATTR_NOT_LONG', null);
-});
-
-test('Characteristic.onReadRequest: RESULT_SUCCESS', () => {
-  const characteristic = Characteristic('mockUUID', Parent, util, 'mockDescriptor', { encode, decode });
-
-  const callback = jest.fn();
-  characteristic.onReadRequest(false, callback);
-
-  expect(callback).toBeCalledWith('RESULT_SUCCESS', characteristic.state);
 });
 
 test('Characteristic.onSubscribe', () => {
@@ -100,12 +81,10 @@ test('Characteristic.onUnsubscribe', () => {
 test('Characteristic.updateState', () => {
   const characteristic = Characteristic('mockUUID', Parent, util, 'mockDescriptor', { encode, decode });
 
-  characteristic.updateState('mockState');
-  expect(characteristic.state).toBe('mockEncode');
-
+  const maxValueSize = 10;
   const updateValueCallback = jest.fn();
-  characteristic.onSubscribe(null, updateValueCallback);
-  characteristic.updateState('mockState');
+  characteristic.onSubscribe(maxValueSize, updateValueCallback);
+  characteristic.updateState({ mockState: 'mockState' });
 
   expect(updateValueCallback).toBeCalledWith('mockEncode');
 });

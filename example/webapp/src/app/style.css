@@ -10,7 +10,7 @@
 
 .app-counter {
   margin-bottom: 40px;
-  line-height: calc(100vh - 200px);
+  line-height: calc(100vh - 300px);
   font-size: 80vh;
   color: black;
   text-align: center;

@@ -9,3 +9,7 @@ export const BLENO_CONFIG = {
   CHARACTERISTIC_UUID: CONFIG.CHARACTERISTIC_UUID.replace(/-/g, ''),
   DESCRIPTOR_UUID: '2901',
 };
+
+export const COMMON_TYPES = {
+  BLUETOOTH_SYNC_REQUEST: '@@bluetooth/SYNC_REQUEST',
+};
