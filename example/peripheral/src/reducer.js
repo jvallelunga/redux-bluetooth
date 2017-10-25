@@ -1,9 +1,15 @@
-export default function counter(state = 0, { type }) {
+export default function counter(state = { counter: 0 }, { type, payload }) {
   switch (type) {
     case 'INCREMENT':
-      return state + 1;
+      return {
+        counter: state.counter + 1,
+        quote: payload,
+      };
     case 'DECREMENT':
-      return state - 1;
+      return {
+        counter: state.counter - 1,
+        quote: payload,
+      };
     default:
       return state;
   }

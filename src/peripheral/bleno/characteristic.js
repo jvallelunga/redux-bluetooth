@@ -2,11 +2,9 @@ export default function Characteristic(uuid, Parent, util, descriptor, { encode,
   function ReduxCharacteristic() {
     Parent.call(this, {
       uuid,
-      properties: ['read', 'write', 'notify'],
+      properties: ['write', 'notify'],
       descriptors: [descriptor],
     });
-
-    this.state = null;
   }
 
   util.inherits(ReduxCharacteristic, Parent);
@@ -18,21 +16,14 @@ export default function Characteristic(uuid, Parent, util, descriptor, { encode,
       return;
     }
 
-    this.onAction(decode(data));
+    const action = decode(data);
+    this.onAction(JSON.parse(action));
 
     callback(this.RESULT_SUCCESS);
   };
 
-  ReduxCharacteristic.prototype.onReadRequest = function (offset, callback) {
-    if (offset) {
-      callback(this.RESULT_ATTR_NOT_LONG, null);
-      return;
-    }
-
-    callback(this.RESULT_SUCCESS, this.state);
-  };
-
   ReduxCharacteristic.prototype.onSubscribe = function (maxValueSize, updateValueCallback) {
+    this.maxValueSize = maxValueSize;
     this.updateValueCallback = updateValueCallback;
   };
 
@@ -45,9 +36,16 @@ export default function Characteristic(uuid, Parent, util, descriptor, { encode,
   };
 
   ReduxCharacteristic.prototype.updateState = function (state) {
-    this.state = encode(state);
     if (this.updateValueCallback) {
-      this.updateValueCallback(this.state);
+      const message = encode(`[[[${JSON.stringify(state)}]]]`);
+      let i = 0;
+      do {
+        const next = i + this.maxValueSize;
+        const end = Math.min(next, message.length);
+        const data = message.slice(i, end);
+        this.updateValueCallback(data);
+        i = next;
+      } while (i < message.length);
     }
   };
 

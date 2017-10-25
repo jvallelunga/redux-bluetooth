@@ -16,18 +16,20 @@ export default class App extends PureComponent {
   }
 
   render() {
-    const { store, status, onIncrement, onDecrement } = this.props;
+    const { counter, quote, status, onIncrement, onDecrement } = this.props;
 
-    const counter = Number(store);
+    const nCounter = Number(counter);
     let className = 'app-counter';
-    if (counter > 0) className += ' app-counter--positive';
-    if (counter < 0) className += ' app-counter--negative';
+    if (nCounter > 0) className += ' app-counter--positive';
+    if (nCounter < 0) className += ' app-counter--negative';
 
     return (
       <div className="app">
         {status === 'CONNECTED' &&
-          <div className={className}>
-            {store}
+          <div>
+            <span className={className}>{counter}</span>
+            <br />
+            <span>{quote}</span>
           </div>}
         <div className="app-actions">
           {status !== 'CONNECTED' &&
@@ -49,7 +51,8 @@ export default class App extends PureComponent {
 }
 
 App.propTypes = {
-  store: PropTypes.number,
+  counter: PropTypes.number,
+  quote: PropTypes.string,
   status: PropTypes.string,
   onConnect: PropTypes.func,
   onIncrement: PropTypes.func,
@@ -57,7 +60,8 @@ App.propTypes = {
 };
 
 App.defaultProps = {
-  store: 0,
+  counter: 0,
+  quote: '',
   status: '',
   onConnect: () => true,
   onIncrement: () => true,

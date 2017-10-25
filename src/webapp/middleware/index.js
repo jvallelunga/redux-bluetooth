@@ -6,13 +6,11 @@ const { sendAction } = ACTIONS;
 const {
   BLUETOOTH_CONNECT_REQUEST,
   BLUETOOTH_SEND_REQUEST,
-  BLUETOOTH_SYNC_REQUEST,
 } = TYPES;
 
 const REQUESTS = [
   BLUETOOTH_CONNECT_REQUEST,
   BLUETOOTH_SEND_REQUEST,
-  BLUETOOTH_SYNC_REQUEST,
 ];
 
 export default (actions = []) => store => next => (action) => {

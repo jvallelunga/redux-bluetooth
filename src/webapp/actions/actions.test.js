@@ -58,23 +58,6 @@ test('connectStore', () => {
   return expect(promise).resolves.toBe(true);
 });
 
-test('syncStore', () => {
-  const { syncStore } = Actions(central, TYPES);
-  const action = syncStore();
-  expect.assertions(4);
-
-  expect(action.type).toEqual(TYPES.BLUETOOTH_SYNC_REQUEST);
-
-  const promise = action.request(dispatch).then(() => {
-    expect(central.read).toBeCalled();
-    expect(dispatch).toBeCalledWith({ type: TYPES.BLUETOOTH_SYNC, payload: 'mockState' });
-
-    return true;
-  });
-
-  return expect(promise).resolves.toBe(true);
-});
-
 test('sendAction', () => {
   const { sendAction } = Actions(central, TYPES);
   const action = sendAction('mockAction');
