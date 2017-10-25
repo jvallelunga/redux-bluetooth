@@ -33,7 +33,7 @@ test('syncState', () => {
 test('connectStore', () => {
   const { connectStore } = Actions(central, TYPES);
   const action = connectStore('mockName');
-  expect.assertions(10);
+  expect.assertions(9);
 
   expect(action.type).toEqual(TYPES.BLUETOOTH_CONNECT_REQUEST);
 
@@ -46,11 +46,10 @@ test('connectStore', () => {
     expect(dispatch.mock.calls[1][0]).toEqual({ type: TYPES.BLUETOOTH_CONNECTED });
 
     const syncStore = dispatch.mock.calls[2][0];
-    expect(syncStore.type).toEqual(TYPES.BLUETOOTH_SYNC_REQUEST);
+    expect(syncStore.type).toEqual(TYPES.BLUETOOTH_SEND_REQUEST);
     return syncStore.request(dispatch);
   }).then(() => {
-    expect(central.read).toBeCalled();
-    expect(dispatch.mock.calls[3][0]).toEqual({ type: TYPES.BLUETOOTH_SYNC, payload: 'mockState' });
+    expect(central.write).toBeCalled();
 
     return true;
   });

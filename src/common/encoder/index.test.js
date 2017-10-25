@@ -6,16 +6,10 @@ import Encoder from '.';
 const { encode, decode } = new Encoder(TextEncoding);
 
 test('encode / decode', () => {
-  const data = encode({ type: 'TEST', payload: 'PAYLOAD' });
+  const message = JSON.stringify({ type: 'TEST', payload: 'PAYLOAD' });
+  const data = encode(message);
   const result = decode(data);
 
-  expect(result).toEqual({ type: 'TEST', payload: 'PAYLOAD' });
+  expect(result).toEqual(message);
 });
 
-
-test('encode / decode: string', () => {
-  const data = encode('{ "type": "TEST", "payload": "PAYLOAD" }');
-  const result = decode(data);
-
-  expect(result).toEqual({ type: 'TEST', payload: 'PAYLOAD' });
-});
