@@ -5,3 +5,4 @@ docs
 yarn.lock
 *.test.js
 README.md
+dist
