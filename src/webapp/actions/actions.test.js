@@ -10,7 +10,6 @@ beforeEach(() => {
   central = {
     connect: jest.fn().mockReturnValue(Promise.resolve()),
     handler: jest.fn(),
-    read: jest.fn().mockReturnValue(Promise.resolve('mockState')),
     write: jest.fn().mockReturnValue(Promise.resolve()),
   };
 });

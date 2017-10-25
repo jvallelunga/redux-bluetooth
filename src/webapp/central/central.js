@@ -39,13 +39,6 @@ export default function Central(
     return listerner;
   });
 
-  const read = () => {
-    if (state.server && state.server.connected && state.characteristic) {
-      return state.characteristic.readValue().then(data => decode(data));
-    }
-    return Promise.reject(new Error('Bluetooth: Not Connected'));
-  };
-
   const write = (action) => {
     if (!state.server || !state.server.connected || !state.characteristic) return null;
     const stringify = JSON.stringify(action);
@@ -58,7 +51,6 @@ export default function Central(
     connected: state.server && state.server.connected,
     connect,
     handler,
-    read,
     write,
   };
 }

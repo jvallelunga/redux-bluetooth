@@ -81,6 +81,8 @@ test('Characteristic.onUnsubscribe', () => {
 test('Characteristic.updateState', () => {
   const characteristic = Characteristic('mockUUID', Parent, util, 'mockDescriptor', { encode, decode });
 
+  characteristic.updateState({ mockState: 'mockState' });
+
   const maxValueSize = 10;
   const updateValueCallback = jest.fn();
   characteristic.onSubscribe(maxValueSize, updateValueCallback);

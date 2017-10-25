@@ -73,16 +73,22 @@ test('Central: handler', () => {
   return expect(promise).resolves.toBe(true);
 });
 
-test('Central: read', () => {
-  expect.assertions(2);
+test('Central: handler chunk', () => {
+  const callback = jest.fn();
+  expect.assertions(3);
 
-  const promise = central.connect('mockName').then(() => central.read())
-  .then((data) => {
-    expect(characteristic.readValue).toBeCalled();
-    return data;
+  encoder.decode = jest.fn().mockReturnValue('{"mockDecode":"mockDecode"}');
+  central = new Central(bluetooth, encoder, CENTRAL_CONFIG);
+
+  const promise = central.connect('mockName').then(() => central.handler(callback))
+  .then((listerner) => {
+    expect(characteristic.startNotifications).toBeCalled();
+    listerner({ target: { value: 'mockEvent' } });
+    expect(callback.mock.calls.length).toEqual(0);
+    return true;
   });
 
-  return expect(promise).resolves.toBe('[[[{"mockDecode":"mockDecode"}]]]');
+  return expect(promise).resolves.toBe(true);
 });
 
 test('Central: write', () => {
