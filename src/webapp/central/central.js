@@ -1,4 +1,5 @@
 export default function Central(
+  id,
   bluetooth,
   { encode, decode },
   { SERVICE_UUID, CHARACTERISTIC_UUID }) {
@@ -6,6 +7,10 @@ export default function Central(
     server: null,
     characteristic: null,
     message: '',
+    configuration: {
+      limit: 20,
+    },
+    id,
   };
 
   const connect = name => bluetooth
@@ -22,29 +27,58 @@ export default function Central(
         state.characteristic = characteristic;
       });
 
-  const handler = callback => state.characteristic.startNotifications().then(() => {
-    const listerner = (event) => {
-      const chunk = decode(event.target.value);
-      const message = `${state.message}${chunk}`;
+  const listener = callback => (event) => {
+    const chunk = decode(event.target.value);
+    const message = `${state.message}${chunk}`;
+    if (message.startsWith('[[[') && message.endsWith(']]]')) {
+      const json = JSON.parse(message.slice(3, message.length - 3));
+      callback(json);
+      state.message = '';
+    } else if (message.startsWith('|||') && message.endsWith('|||')) {
+      state.message = '';
+    } else {
+      state.message = message;
+    }
+    return state.message;
+  };
 
-      if (message.startsWith('[[[') && message.endsWith(']]]')) {
-        const json = JSON.parse(message.slice(3, message.length - 3));
-        callback(json);
-        state.message = '';
-      } else {
-        state.message = message;
-      }
-    };
-    state.characteristic.addEventListener('characteristicvaluechanged', listerner);
-    return listerner;
-  });
+  const handler = callback => state.characteristic.startNotifications()
+    .then(() => {
+      const eventListener = listener(callback);
+      state.characteristic.addEventListener('characteristicvaluechanged', eventListener);
+      return state.characteristic.readValue();
+    }).then((data) => {
+      const configuration = decode(data);
+      state.configuration = JSON.parse(configuration.slice(3, configuration.length - 3));
+      return state.configuration;
+    });
 
   const write = (action) => {
-    if (!state.server || !state.server.connected || !state.characteristic) return null;
-    const stringify = JSON.stringify(action);
-    const serialized = encode(stringify);
+    if (!state.server || !state.server.connected || !state.characteristic) return Promise.reject();
+    const stringify = `[[[${JSON.stringify(action)}]]]`;
+    const message = encode(stringify);
+    const key = encode(`${state.id}:`);
+    const dataSize = state.configuration.limit - key.length;
+    const writes = [];
 
-    return state.characteristic.writeValue(serialized);
+
+    let i = 0;
+    do {
+      const next = i + dataSize;
+      const end = Math.min(next, message.length);
+      const data = message.slice(i, end);
+      const buffer = new Uint8Array(key.length + data.length);
+      buffer.set(key, 0);
+      buffer.set(data, key.length);
+      writes.push(buffer);
+
+      i = next;
+    } while (i < message.length);
+
+    // Serialize Promises
+    return writes.reduce((promise, chunk) =>
+      promise.then(() => state.characteristic.writeValue(chunk)),
+      Promise.resolve());
   };
 
   return {
@@ -52,5 +86,6 @@ export default function Central(
     connect,
     handler,
     write,
+    listener,
   };
 }
