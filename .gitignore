@@ -5,6 +5,9 @@ tmp.js
 # Compiled
 build
 
+# Dist
+dist
+
 # Logs
 logs
 *.log

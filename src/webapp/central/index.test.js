@@ -11,6 +11,7 @@ global.navigator = { bluetooth: null };
 
 test('central', () => {
   const result = new Central(
+    123,
     null,
     true,
     CENTRAL_CONFIG,

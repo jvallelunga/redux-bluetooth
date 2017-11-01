@@ -36,7 +36,7 @@ const bluetooth = {
 let central = null;
 
 beforeEach(() => {
-  central = new Central(bluetooth, encoder, CENTRAL_CONFIG);
+  central = new Central(123, bluetooth, encoder, CENTRAL_CONFIG);
 });
 
 afterEach(() => {
@@ -60,44 +60,87 @@ test('Central: connect', () => {
 
 test('Central: handler', () => {
   const callback = jest.fn();
-  expect.assertions(3);
+  expect.assertions(4);
 
   const promise = central.connect('mockName').then(() => central.handler(callback))
-  .then((listerner) => {
+  .then((configuration) => {
+    expect(configuration).toEqual({ mockDecode: 'mockDecode' });
     expect(characteristic.startNotifications).toBeCalled();
-    listerner({ target: { value: 'mockEvent' } });
-    expect(callback).toBeCalledWith({ mockDecode: 'mockDecode' });
+    expect(characteristic.readValue).toBeCalled();
     return true;
   });
 
   return expect(promise).resolves.toBe(true);
 });
 
-test('Central: handler chunk', () => {
+test('Central: listener - chunk message', () => {
   const callback = jest.fn();
   expect.assertions(3);
 
   encoder.decode = jest.fn().mockReturnValue('{"mockDecode":"mockDecode"}');
-  central = new Central(bluetooth, encoder, CENTRAL_CONFIG);
+  central = new Central(123, bluetooth, encoder, CENTRAL_CONFIG);
 
-  const promise = central.connect('mockName').then(() => central.handler(callback))
-  .then((listerner) => {
-    expect(characteristic.startNotifications).toBeCalled();
-    listerner({ target: { value: 'mockEvent' } });
-    expect(callback.mock.calls.length).toEqual(0);
+  const promise = central.connect('mockName')
+  .then(() => {
+    const listener = central.listener(callback);
+    const message = listener({ target: { value: 'mockEvent' } });
+    expect(callback).not.toBeCalled();
+    expect(message).toEqual('{"mockDecode":"mockDecode"}');
     return true;
   });
 
   return expect(promise).resolves.toBe(true);
 });
 
-test('Central: write', () => {
+test('Central: listener - complete message', () => {
+  const callback = jest.fn();
+  expect.assertions(3);
+
+  encoder.decode = jest.fn().mockReturnValue('[[[{"mockDecode":"mockDecode"}]]]');
+  central = new Central(123, bluetooth, encoder, CENTRAL_CONFIG);
+
+  const promise = central.connect('mockName')
+  .then(() => {
+    const listener = central.listener(callback);
+    const message = listener({ target: { value: 'mockEvent' } });
+    expect(callback).toBeCalledWith({ mockDecode: 'mockDecode' });
+    expect(message).toEqual('');
+    return true;
+  });
+
+  return expect(promise).resolves.toBe(true);
+});
+
+test('Central: listener - internal message', () => {
+  const callback = jest.fn();
+  expect.assertions(3);
+
+  encoder.decode = jest.fn().mockReturnValue('|||{"mockDecode":"mockDecode"}|||');
+  central = new Central(123, bluetooth, encoder, CENTRAL_CONFIG);
+
+  const promise = central.connect('mockName')
+  .then(() => {
+    const listener = central.listener(callback);
+    const message = listener({ target: { value: 'mockEvent' } });
+    expect(callback).not.toBeCalled();
+    expect(message).toEqual('');
+    return true;
+  });
+
+  return expect(promise).resolves.toBe(true);
+});
+
+test('Central: write - empty message', () => {
   expect.assertions(2);
+
+  encoder.encode = jest.fn().mockReturnValue([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]);
+  central = new Central(123, bluetooth, encoder, CENTRAL_CONFIG);
 
   const promise = central.connect('mockName')
   .then(() => central.write({ type: 'ACTION' }))
   .then(() => {
-    expect(characteristic.writeValue).toBeCalledWith('mockEncode');
+    expect(characteristic.writeValue)
+    .toBeCalledWith(new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]));
     return true;
   });
 
