@@ -8,7 +8,7 @@ export default function Central(
     characteristic: null,
     message: '',
     configuration: {
-      limit: 20,
+      limit: 20, // HARDCODE: https://devzone.nordicsemi.com/question/3860/largest-allowed-setting-for-variable-length-characteristic/
     },
     id,
   };
@@ -46,10 +46,6 @@ export default function Central(
     .then(() => {
       const eventListener = listener(callback);
       state.characteristic.addEventListener('characteristicvaluechanged', eventListener);
-      return state.characteristic.readValue();
-    }).then((data) => {
-      const configuration = decode(data);
-      state.configuration = JSON.parse(configuration.slice(3, configuration.length - 3));
       return state.configuration;
     });
 

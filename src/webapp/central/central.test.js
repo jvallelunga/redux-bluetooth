@@ -60,13 +60,12 @@ test('Central: connect', () => {
 
 test('Central: handler', () => {
   const callback = jest.fn();
-  expect.assertions(4);
+  expect.assertions(3);
 
   const promise = central.connect('mockName').then(() => central.handler(callback))
   .then((configuration) => {
-    expect(configuration).toEqual({ mockDecode: 'mockDecode' });
+    expect(configuration).toEqual({ limit: 20 });
     expect(characteristic.startNotifications).toBeCalled();
-    expect(characteristic.readValue).toBeCalled();
     return true;
   });
 
