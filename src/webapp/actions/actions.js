@@ -26,8 +26,18 @@ export default function Actions(central, TYPES) {
     },
   });
 
+  const disconnectStore = () => ({
+    type: TYPES.BLUETOOTH_DISCONNECT_REQUEST,
+    request: (dispatch) => {
+      dispatch({ type: TYPES.BLUETOOTH_DISCONNECTING });
+      central.disconnect();
+      dispatch({ type: TYPES.BLUETOOTH_DISCONNECTED });
+    },
+  });
+
   return {
     connectStore,
+    disconnectStore,
     syncState,
     sendAction,
   };

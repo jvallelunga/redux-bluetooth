@@ -3,15 +3,26 @@ import * as STATUS from '../central/status';
 
 import initial from './initial';
 
-export default (autosync = true) => (state = initial, { type, payload }) => {
+export function status(state = initial.status, { type }) {
   switch (type) {
     case TYPES.BLUETOOTH_CONNECTING:
-      return Object.assign({}, state, { status: STATUS.CONNECTING });
+      return STATUS.CONNECTING;
     case TYPES.BLUETOOTH_CONNECTED:
-      return Object.assign({}, state, { status: STATUS.CONNECTED });
-    case TYPES.BLUETOOTH_SYNC:
-      return autosync ? Object.assign({}, state, { store: payload }) : state;
+      return STATUS.CONNECTED;
+    case TYPES.BLUETOOTH_DISCONNECTING:
+      return STATUS.DISCONNECTING;
+    case TYPES.BLUETOOTH_DISCONNECTED:
+      return STATUS.DISCONNECTED;
     default:
       return state;
   }
-};
+}
+
+export function remote(state = null, { type, payload }) {
+  switch (type) {
+    case TYPES.BLUETOOTH_SYNC:
+      return payload;
+    default:
+      return state;
+  }
+}

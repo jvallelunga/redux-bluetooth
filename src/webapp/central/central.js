@@ -13,11 +13,16 @@ export default function Central(
     id,
   };
 
+  const isConnected = () => state.server && state.server.connected;
+
   const connect = name => bluetooth
       .requestDevice({
         filters: [{ services: [SERVICE_UUID], name }],
       })
-      .then(device => device.gatt.connect())
+      .then((device) => {
+        state.device = device;
+        return device.gatt.connect();
+      })
       .then((server) => {
         state.server = server;
         return server.getPrimaryService(SERVICE_UUID);
@@ -26,6 +31,12 @@ export default function Central(
       .then((characteristic) => {
         state.characteristic = characteristic;
       });
+
+  const disconnect = () => {
+    if (isConnected()) {
+      state.device.gatt.disconnect();
+    }
+  };
 
   const listener = callback => (event) => {
     const chunk = decode(event.target.value);
@@ -78,8 +89,9 @@ export default function Central(
   };
 
   return {
-    connected: state.server && state.server.connected,
+    connected: isConnected(),
     connect,
+    disconnect,
     handler,
     write,
     listener,

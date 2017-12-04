@@ -5,11 +5,11 @@ import MIDDLEWARE from './middleware';
 import REDUCERS from './reducers';
 import STORE from './store';
 
-const { connectStore } = ACTIONS;
+const { connectStore, disconnectStore } = ACTIONS;
 
 export const types = TYPES;
 export const status = STATUS;
-export const actions = { connectStore };
+export const actions = { connectStore, disconnectStore };
 export const reducers = REDUCERS;
 export const middleware = MIDDLEWARE;
 export const createSyncStore = STORE;
