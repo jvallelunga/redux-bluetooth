@@ -1,6 +1,6 @@
 {
   "name": "redux-bluetooth",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "description": "Redux middleware to dispatch actions via bluetooth to a peripheral store",
   "main": "build/index.js",
   "scripts": {
