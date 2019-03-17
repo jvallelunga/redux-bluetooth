@@ -1,13 +1,13 @@
 {
   "main.css": "/redux-bluetooth/static/css/main.66a8e5c7.chunk.css",
-  "main.js": "/redux-bluetooth/static/js/main.0d0bf184.chunk.js",
-  "main.js.map": "/redux-bluetooth/static/js/main.0d0bf184.chunk.js.map",
+  "main.js": "/redux-bluetooth/static/js/main.340c7e33.chunk.js",
+  "main.js.map": "/redux-bluetooth/static/js/main.340c7e33.chunk.js.map",
   "runtime~main.js": "/redux-bluetooth/static/js/runtime~main.62cbf256.js",
   "runtime~main.js.map": "/redux-bluetooth/static/js/runtime~main.62cbf256.js.map",
   "static/js/2.2698f9e4.chunk.js": "/redux-bluetooth/static/js/2.2698f9e4.chunk.js",
   "static/js/2.2698f9e4.chunk.js.map": "/redux-bluetooth/static/js/2.2698f9e4.chunk.js.map",
   "index.html": "/redux-bluetooth/index.html",
-  "precache-manifest.9d3af923204a195c043051172b3d34fc.js": "/redux-bluetooth/precache-manifest.9d3af923204a195c043051172b3d34fc.js",
+  "precache-manifest.d42a120569d72a8f6e137f6ee2d8eba6.js": "/redux-bluetooth/precache-manifest.d42a120569d72a8f6e137f6ee2d8eba6.js",
   "service-worker.js": "/redux-bluetooth/service-worker.js",
   "static/css/main.66a8e5c7.chunk.css.map": "/redux-bluetooth/static/css/main.66a8e5c7.chunk.css.map"
 }
