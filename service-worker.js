@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/redux-bluetooth/precache-manifest.7fc2964b65498580db133edcb525afbd.js"
+  "/redux-bluetooth/precache-manifest.a59bf36c1501653bbf809bcd226f0263.js"
 );
 
 workbox.clientsClaim();
