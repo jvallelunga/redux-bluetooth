@@ -2,7 +2,7 @@ import * as TYPES from './actions/types';
 import * as STATUS from './central/status';
 import ACTIONS from './actions';
 import MIDDLEWARE from './middleware';
-import REDUCERS from './reducers';
+import * as REDUCERS from './reducers';
 import STORE from './store';
 
 const { connectStore, disconnectStore } = ACTIONS;

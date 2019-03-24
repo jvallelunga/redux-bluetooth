@@ -57,4 +57,3 @@ test('type: BLUETOOTH_SYNC, autosync: false', () => {
 
   return expect(nextState).toEqual({ });
 });
-

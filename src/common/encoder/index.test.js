@@ -12,4 +12,3 @@ test('encode / decode', () => {
 
   expect(result).toEqual(message);
 });
-

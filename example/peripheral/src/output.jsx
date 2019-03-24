@@ -3,7 +3,7 @@ const { h, mount, Text } = require('ink');
 const { Provider, connect } = require('ink-redux');
 const PropTypes = require('prop-types');
 
-export default (store) => {
+export default store => {
   function Counter({ counter, quote }) {
     const color = {
       blue: counter > 0,
@@ -12,7 +12,7 @@ export default (store) => {
     return (
       <div>
         Counter:
-        <Text {...color}> {counter}</Text>
+        <Text {...color} > {counter}</Text>
         <br />
         <Text>{quote}</Text>
       </div>

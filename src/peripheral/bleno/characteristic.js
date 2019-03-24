@@ -11,8 +11,8 @@ export default function Characteristic(uuid, Parent, util, descriptor, { encode,
 
   util.inherits(ReduxCharacteristic, Parent);
 
-  ReduxCharacteristic.prototype.onWriteRequest =
-  function (data, offset, withoutResponse, callback) {
+  ReduxCharacteristic.prototype.onWriteRequest = function
+  (data, offset, withoutResponse, callback) {
     if (offset) {
       callback(this.RESULT_ATTR_NOT_LONG);
       return this.RESULT_ATTR_NOT_LONG;
@@ -21,7 +21,7 @@ export default function Characteristic(uuid, Parent, util, descriptor, { encode,
     const buffer = decode(data);
     const id = buffer.slice(0, 9);
     const chunk = buffer.slice(10, this.maxValueSize);
-    const message = ((this.messages[id] || '') + chunk);
+    const message = (this.messages[id] || '') + chunk;
     if (message.startsWith('[[[') && message.endsWith(']]]')) {
       const action = JSON.parse(message.slice(3, message.length - 3));
       this.onAction(action);
@@ -39,9 +39,7 @@ export default function Characteristic(uuid, Parent, util, descriptor, { encode,
       callback(this.RESULT_ATTR_NOT_LONG, null);
       return;
     }
-    const configuration = encode(
-      `|||${JSON.stringify(this.configuration)}|||`,
-    );
+    const configuration = encode(`|||${JSON.stringify(this.configuration)}|||`);
     callback(this.RESULT_SUCCESS, configuration);
   };
 

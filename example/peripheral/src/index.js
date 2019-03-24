@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import { connectSyncStore } from 'redux-bluetooth/build/peripheral';
+import { connectSyncStore } from '../../../build/peripheral';
 
 import reducer from './reducer';
 import output from './output';

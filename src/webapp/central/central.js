@@ -2,7 +2,8 @@ export default function Central(
   id,
   bluetooth,
   { encode, decode },
-  { SERVICE_UUID, CHARACTERISTIC_UUID }) {
+  { SERVICE_UUID, CHARACTERISTIC_UUID },
+) {
   const state = {
     server: null,
     characteristic: null,
@@ -16,21 +17,21 @@ export default function Central(
   const isConnected = () => state.server && state.server.connected;
 
   const connect = name => bluetooth
-      .requestDevice({
-        filters: [{ services: [SERVICE_UUID], name }],
-      })
-      .then((device) => {
-        state.device = device;
-        return device.gatt.connect();
-      })
-      .then((server) => {
-        state.server = server;
-        return server.getPrimaryService(SERVICE_UUID);
-      })
-      .then(service => service.getCharacteristic(CHARACTERISTIC_UUID))
-      .then((characteristic) => {
-        state.characteristic = characteristic;
-      });
+    .requestDevice({
+      filters: [{ services: [SERVICE_UUID], name }],
+    })
+    .then((device) => {
+      state.device = device;
+      return device.gatt.connect();
+    })
+    .then((server) => {
+      state.server = server;
+      return server.getPrimaryService(SERVICE_UUID);
+    })
+    .then(service => service.getCharacteristic(CHARACTERISTIC_UUID))
+    .then((characteristic) => {
+      state.characteristic = characteristic;
+    });
 
   const disconnect = () => {
     if (isConnected()) {
@@ -83,9 +84,9 @@ export default function Central(
     } while (i < message.length);
 
     // Serialize Promises
-    return writes.reduce((promise, chunk) =>
-      promise.then(() => state.characteristic.writeValue(chunk)),
-      Promise.resolve());
+    return writes.reduce((promise, chunk) => promise
+      .then(() => state.characteristic.writeValue(chunk)),
+    Promise.resolve());
   };
 
   return {

@@ -63,11 +63,11 @@ test('Central: handler', () => {
   expect.assertions(3);
 
   const promise = central.connect('mockName').then(() => central.handler(callback))
-  .then((configuration) => {
-    expect(configuration).toEqual({ limit: 20 });
-    expect(characteristic.startNotifications).toBeCalled();
-    return true;
-  });
+    .then((configuration) => {
+      expect(configuration).toEqual({ limit: 20 });
+      expect(characteristic.startNotifications).toBeCalled();
+      return true;
+    });
 
   return expect(promise).resolves.toBe(true);
 });
@@ -80,13 +80,13 @@ test('Central: listener - chunk message', () => {
   central = new Central(123, bluetooth, encoder, CENTRAL_CONFIG);
 
   const promise = central.connect('mockName')
-  .then(() => {
-    const listener = central.listener(callback);
-    const message = listener({ target: { value: 'mockEvent' } });
-    expect(callback).not.toBeCalled();
-    expect(message).toEqual('{"mockDecode":"mockDecode"}');
-    return true;
-  });
+    .then(() => {
+      const listener = central.listener(callback);
+      const message = listener({ target: { value: 'mockEvent' } });
+      expect(callback).not.toBeCalled();
+      expect(message).toEqual('{"mockDecode":"mockDecode"}');
+      return true;
+    });
 
   return expect(promise).resolves.toBe(true);
 });
@@ -99,13 +99,13 @@ test('Central: listener - complete message', () => {
   central = new Central(123, bluetooth, encoder, CENTRAL_CONFIG);
 
   const promise = central.connect('mockName')
-  .then(() => {
-    const listener = central.listener(callback);
-    const message = listener({ target: { value: 'mockEvent' } });
-    expect(callback).toBeCalledWith({ mockDecode: 'mockDecode' });
-    expect(message).toEqual('');
-    return true;
-  });
+    .then(() => {
+      const listener = central.listener(callback);
+      const message = listener({ target: { value: 'mockEvent' } });
+      expect(callback).toBeCalledWith({ mockDecode: 'mockDecode' });
+      expect(message).toEqual('');
+      return true;
+    });
 
   return expect(promise).resolves.toBe(true);
 });
@@ -118,13 +118,13 @@ test('Central: listener - internal message', () => {
   central = new Central(123, bluetooth, encoder, CENTRAL_CONFIG);
 
   const promise = central.connect('mockName')
-  .then(() => {
-    const listener = central.listener(callback);
-    const message = listener({ target: { value: 'mockEvent' } });
-    expect(callback).not.toBeCalled();
-    expect(message).toEqual('');
-    return true;
-  });
+    .then(() => {
+      const listener = central.listener(callback);
+      const message = listener({ target: { value: 'mockEvent' } });
+      expect(callback).not.toBeCalled();
+      expect(message).toEqual('');
+      return true;
+    });
 
   return expect(promise).resolves.toBe(true);
 });
@@ -136,13 +136,14 @@ test('Central: write - empty message', () => {
   central = new Central(123, bluetooth, encoder, CENTRAL_CONFIG);
 
   const promise = central.connect('mockName')
-  .then(() => central.write({ type: 'ACTION' }))
-  .then(() => {
-    expect(characteristic.writeValue)
-    .toBeCalledWith(new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]));
-    return true;
-  });
+    .then(() => central.write({ type: 'ACTION' }))
+    .then(() => {
+      expect(characteristic.writeValue)
+        .toBeCalledWith(
+          new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]),
+        );
+      return true;
+    });
 
   return expect(promise).resolves.toBe(true);
 });
-

@@ -1,5 +1,7 @@
 /* global window */
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import {
+  createStore, combineReducers, applyMiddleware, compose,
+} from 'redux';
 
 import middleware from '../middleware';
 import { status, remote } from '../reducers';

@@ -16,7 +16,9 @@ export default class App extends PureComponent {
   }
 
   render() {
-    const { counter, quote, status, onIncrement, onDecrement } = this.props;
+    const {
+      counter, quote, status, onIncrement, onDecrement,
+    } = this.props;
 
     const nCounter = Number(counter);
     let className = 'app-counter';
@@ -25,25 +27,23 @@ export default class App extends PureComponent {
 
     return (
       <div className="app">
-        {status === 'CONNECTED' &&
+        {status === 'CONNECTED' && (
           <div>
             <span className={className}>{counter}</span>
             <br />
             <span>{quote}</span>
-          </div>}
+          </div>
+        )}
         <div className="app-actions">
-          {status !== 'CONNECTED' &&
-            <button className="app-actions__buton" onClick={this.handlerConnect}>
-              Connect
-            </button>}
-          {status === 'CONNECTED' &&
-            <button className="app-actions__buton" onClick={onIncrement}>
-              +
-            </button>}
-          {status === 'CONNECTED' &&
-            <button className="app-actions__buton" onClick={onDecrement}>
-              -
-            </button>}
+          {status !== 'CONNECTED' && (
+            <button type="button" className="app-actions__buton" onClick={this.handlerConnect}>Connect</button>
+          )}
+          {status === 'CONNECTED' && (
+            <button type="button" className="app-actions__buton" onClick={onIncrement}>+</button>
+          )}
+          {status === 'CONNECTED' && (
+            <button type="button" className="app-actions__buton" onClick={onDecrement}>-</button>
+          )}
         </div>
       </div>
     );

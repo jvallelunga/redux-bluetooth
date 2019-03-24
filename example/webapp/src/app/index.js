@@ -1,14 +1,17 @@
 import { connect } from 'react-redux';
-import { actions } from 'redux-bluetooth/build/webapp';
+import { actions } from '../../../../build/webapp';
 
 import { increment, decrement } from '../actions';
 
 import Component from './component';
 
-const mapState = ({ status, store }) => ({
-  status,
-  ...store,
-});
+const mapState = (state) => {
+  const { status, remote } = state;
+  return ({
+    status,
+    ...remote,
+  });
+};
 
 const mapAction = {
   onConnect: actions.connectStore,

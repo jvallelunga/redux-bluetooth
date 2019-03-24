@@ -5,15 +5,16 @@
   "main": "build/index.js",
   "scripts": {
     "prestart": "npm run build",
-    "start": "node build/index.js",
+    "start": "babel-node src/index.js",
     "dev": "watch 'npm run build' src",
+    "prebuild": "cd ../.. && npm run build",
     "build": "babel src -d build",
     "test": "jest",
     "test:watch": "npm test -- --watch"
   },
   "babel": {
     "presets": [
-      "es2015-node5"
+      "@babel/preset-env"
     ],
     "plugins": [
       [
@@ -41,17 +42,17 @@
   },
   "homepage": "https://github.com/jvallelunga/redux-bluetooth#readme",
   "devDependencies": {
-    "babel-cli": "^6.24.1",
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.4",
     "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-preset-es2015-node5": "^1.2.0",
-    "jest": "^20.0.4",
-    "watch": "^1.0.2"
+    "nodemon": "^1.18.10"
   },
   "dependencies": {
     "ink": "^0.1.2",
     "ink-redux": "^1.0.0",
     "prop-types": "^15.5.10",
-    "redux": "^3.7.1",
-    "redux-bluetooth": "^0.1.1"
+    "redux": "^3.7.1"
   }
 }
