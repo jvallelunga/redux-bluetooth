@@ -11,6 +11,7 @@
     "test": "jest --config .jest.json",
     "test:watch": "npm test -- --watch",
     "test:coverage": "npm test -- --coverage",
+    "test:coverage:codecov": "npm run test -- --coverage && codecov -t $CODECOV_TOKEN",
     "prepublish": "npm run build",
     "release": "np",
     "example:install": "npm run example:peripheral:install && npm run example:webapp:install",
@@ -18,8 +19,7 @@
     "example:webapp:start": "cd example/webapp && npm run start",
     "example:webapp:deploy": "cd example/webapp && npm run deploy",
     "example:peripheral:install": "cd example/peripheral && npm install",
-    "example:peripheral:start": "cd example/peripheral && npm start",
-    "ci:report:coverage": "npm run test -- --coverage && codecov -t $CODECOV_TOKEN"
+    "example:peripheral:start": "cd example/peripheral && npm start"
   },
   "babel": {
     "presets": [
