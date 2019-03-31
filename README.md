@@ -77,13 +77,31 @@ $ npm run example:install
 Make sure you have your bluetooth enabled
 
 ```shell
-$ npm run example:start
+$ npm run example:peripheral:start
+```
+
+### Start Webapp Server
+In a different terminal window
+
+```shell
+$ npm run example:webapp:start
 ```
 
 ### Open Webapp
-Before starting the webapp, go to `chrome://flags/#enable-experimental-web-platform-features`, enable the highlighted flag, and restart Chrome on your mobile.
+After starting the server you will see something similar to this.
+```shell
+Compiled successfully!
+
+You can now view webapp in the browser.
+
+  Local:            https://localhost:3000/
+  On Your Network:  https://192.168.0.105:3000/ 
+
+````
+
+Before opening the webapp, go to `chrome://flags/#enable-experimental-web-platform-features`, enable the highlighted flag, and restart Chrome on your mobile.
 
 Then, Make sure you have your bluetooth enabled.
 
-Finally, open this url https://jvallelunga.github.io/redux-bluetooth/ on your mobile. 
 
+Finally, use the url **On Your Netrowk** to access the web app from your mobile.
