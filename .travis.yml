@@ -10,20 +10,12 @@ addons:
     - gcc-4.8
     - g++-4.8
 script:
-  - npm run ci:test
+  - npm run test
 branches:
   only:
     - master
 cache:
   directories:
     - node_modules
-    - example/webapp/node_modules
-deploy:
- provider: pages
- skip_cleanup: true
- github_token: $GITHUB_TOKEN
- local_dir: example/webapp/build
- on:
-   branch: master
 after_success: 
   - npm run ci:report:coverage

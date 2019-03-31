@@ -19,9 +19,7 @@
     "example:webapp:deploy": "cd example/webapp && npm run deploy",
     "example:peripheral:install": "cd example/peripheral && npm install",
     "example:peripheral:start": "cd example/peripheral && npm start",
-    "ci:test": "jest ./build/",
-    "ci:report:coverage": "npm run ci:test -- --coverage && codecov -t $CODECOV_TOKEN",
-    "ci:example:build": "npm run example:webapp:install && npm run example:webapp:build"
+    "ci:report:coverage": "npm run test -- --coverage && codecov -t $CODECOV_TOKEN"
   },
   "babel": {
     "presets": [
