@@ -1,5 +1,5 @@
 {
   "verbose": true,
-  "testPathIgnorePatterns": ["/build/", "/example/"],
-  "collectCoverageFrom": ["src/**/*.js"]
+  "testPathIgnorePatterns": ["<rootDir>/build", "<rootDir>/example"],
+  "collectCoverageFrom": ["<rootDir>/src/**/*.js"]
 }
